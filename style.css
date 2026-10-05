@@ -1,0 +1,1038 @@
+/* ========================================
+   基本
+======================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary: #4f7cff;
+  --primary-light: #edf2ff;
+
+  --text: #202532;
+  --sub-text: #8a91a0;
+
+  --background: #f6f8fc;
+  --card: #ffffff;
+
+  --border: #edf0f5;
+
+  --orange: #ff9f43;
+  --green: #36c98f;
+  --purple: #9b7cff;
+  --red: #ff6262;
+
+  --radius: 22px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Helvetica Neue",
+    "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans",
+    "Yu Gothic",
+    YuGothic,
+    sans-serif;
+
+  background: var(--background);
+  color: var(--text);
+
+  min-height: 100vh;
+
+  padding-bottom: 100px;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+/* ========================================
+   ヘッダー
+======================================== */
+
+.app-header {
+  max-width: 600px;
+  margin: 0 auto;
+
+  padding:
+    calc(22px + env(safe-area-inset-top))
+    20px
+    18px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-greeting {
+  color: var(--sub-text);
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.app-header h1 {
+  font-size: 24px;
+  letter-spacing: -0.5px;
+}
+
+.today-date {
+  margin-top: 4px;
+  color: var(--sub-text);
+  font-size: 13px;
+}
+
+.header-icon {
+  width: 48px;
+  height: 48px;
+
+  display: grid;
+  place-items: center;
+
+  background: white;
+  border-radius: 16px;
+
+  box-shadow:
+    0 6px 20px rgba(50, 70, 100, 0.08);
+
+  font-size: 25px;
+}
+
+
+/* ========================================
+   メイン
+======================================== */
+
+main {
+  width: 100%;
+  max-width: 600px;
+
+  margin: 0 auto;
+
+  padding: 4px 16px 30px;
+}
+
+.main-page {
+  display: none;
+
+  animation: pageIn 0.25s ease;
+}
+
+.main-page.active {
+  display: block;
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ========================================
+   カード
+======================================== */
+
+.card {
+  background: var(--card);
+
+  border-radius: var(--radius);
+
+  padding: 20px;
+
+  margin-bottom: 16px;
+
+  border: 1px solid rgba(230, 234, 241, 0.8);
+
+  box-shadow:
+    0 5px 20px rgba(40, 60, 90, 0.045);
+}
+
+
+/* ========================================
+   達成率カード
+======================================== */
+
+.achievement-card {
+  background:
+    linear-gradient(
+      135deg,
+      #587fff 0%,
+      #7698ff 100%
+    );
+
+  color: white;
+
+  border-radius: 26px;
+
+  padding: 22px;
+
+  margin-bottom: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-shadow:
+    0 12px 30px rgba(79, 124, 255, 0.22);
+}
+
+.achievement-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.achievement-label {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.achievement-content strong {
+  font-size: 42px;
+  line-height: 1.1;
+  margin: 4px 0;
+}
+
+.achievement-content p {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+
+/* 円形プログレス */
+
+.progress-circle {
+  width: 82px;
+  height: 82px;
+
+  position: relative;
+
+  flex-shrink: 0;
+}
+
+.progress-circle svg {
+  width: 100%;
+  height: 100%;
+
+  transform: rotate(-90deg);
+}
+
+.progress-circle circle {
+  fill: none;
+  stroke-width: 8;
+}
+
+.progress-bg {
+  stroke: rgba(255,255,255,0.25);
+}
+
+.progress-value {
+  stroke: white;
+
+  stroke-linecap: round;
+
+  stroke-dasharray: 264;
+  stroke-dashoffset: 264;
+
+  transition: stroke-dashoffset 0.5s ease;
+}
+
+.progress-circle span {
+  position: absolute;
+
+  inset: 0;
+
+  display: grid;
+  place-items: center;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+
+/* ========================================
+   見出し
+======================================== */
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 16px;
+}
+
+.section-heading > div {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.section-icon,
+.settings-icon {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 14px;
+
+  font-size: 19px;
+
+  flex-shrink: 0;
+}
+
+.section-icon.blue,
+.settings-icon.blue {
+  background: #edf2ff;
+}
+
+.section-icon.orange,
+.settings-icon.orange {
+  background: #fff3e5;
+}
+
+.section-icon.green,
+.settings-icon.green {
+  background: #e9faf3;
+}
+
+.settings-icon.purple {
+  background: #f1edff;
+}
+
+h2 {
+  font-size: 17px;
+}
+
+.description,
+.section-heading p {
+  color: var(--sub-text);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.page-count {
+  background: var(--primary-light);
+  color: var(--primary);
+
+  padding: 6px 10px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* ========================================
+   チェックリスト
+======================================== */
+
+.check-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.check-item {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  padding: 13px 14px;
+
+  background: #f8f9fc;
+
+  border: 1px solid #f0f2f6;
+
+  border-radius: 15px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.check-item:active {
+  transform: scale(0.98);
+}
+
+.check-item.checked {
+  background: #f1f8f5;
+}
+
+.check-box {
+  width: 24px;
+  height: 24px;
+
+  border: 2px solid #d5dae4;
+
+  border-radius: 8px;
+
+  display: grid;
+  place-items: center;
+
+  margin-right: 12px;
+
+  flex-shrink: 0;
+
+  transition: 0.2s ease;
+}
+
+.check-item.checked .check-box {
+  background: var(--green);
+  border-color: var(--green);
+
+  color: white;
+}
+
+.check-item.checked .item-name {
+  text-decoration: line-through;
+  color: #9ba2ad;
+}
+
+.item-name {
+  font-size: 14px;
+  font-weight: 600;
+
+  transition: 0.2s ease;
+}
+
+
+/* ========================================
+   ボタン
+======================================== */
+
+.reset-btn,
+.secondary-btn {
+  width: 100%;
+
+  border: 0;
+
+  border-radius: 14px;
+
+  padding: 13px;
+
+  margin-top: 13px;
+
+  background: #f5f6f8;
+
+  color: #737b89;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.reset-btn:active,
+.secondary-btn:active {
+  transform: scale(0.98);
+}
+
+.danger-reset {
+  color: #ff6262;
+  background: #fff1f1;
+}
+
+
+/* ========================================
+   ページヘッダー
+======================================== */
+
+.page-header {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  margin: 5px 4px 18px;
+}
+
+.large-page-icon {
+  width: 48px;
+  height: 48px;
+
+  display: grid;
+  place-items: center;
+
+  background: white;
+
+  border-radius: 16px;
+
+  font-size: 23px;
+
+  box-shadow:
+    0 5px 18px rgba(40, 60, 90, 0.05);
+}
+
+.page-header h2 {
+  font-size: 21px;
+}
+
+.page-header p {
+  margin-top: 4px;
+
+  color: var(--sub-text);
+
+  font-size: 12px;
+}
+
+
+/* ========================================
+   時間割
+======================================== */
+
+.schedule-item {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 12px 0;
+
+  border-bottom: 1px solid #f0f1f4;
+}
+
+.schedule-item:last-child {
+  border-bottom: 0;
+}
+
+.schedule-number {
+  width: 34px;
+  height: 34px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 11px;
+
+  background: var(--primary-light);
+
+  color: var(--primary);
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.schedule-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.schedule-time {
+  margin-left: auto;
+
+  color: var(--sub-text);
+
+  font-size: 11px;
+}
+
+
+/* ========================================
+   カレンダー
+======================================== */
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+}
+
+.calendar-header strong {
+  font-size: 16px;
+}
+
+.calendar-arrow {
+  width: 38px;
+  height: 38px;
+
+  border: 0;
+
+  background: #f5f7fa;
+
+  border-radius: 12px;
+
+  font-size: 25px;
+
+  color: #697180;
+
+  cursor: pointer;
+}
+
+.calendar {
+  display: grid;
+
+  grid-template-columns:
+    repeat(7, 1fr);
+
+  gap: 6px;
+}
+
+.calendar-day-name {
+  text-align: center;
+
+  color: var(--sub-text);
+
+  font-size: 10px;
+
+  padding-bottom: 5px;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+
+  border-radius: 12px;
+
+  display: grid;
+  place-items: center;
+
+  font-size: 12px;
+
+  cursor: pointer;
+}
+
+.calendar-day.today {
+  background: var(--primary);
+  color: white;
+  font-weight: 700;
+}
+
+.calendar-day.selected {
+  box-shadow:
+    inset 0 0 0 2px var(--primary);
+}
+
+.calendar-day.other-month {
+  color: #c9ced7;
+}
+
+.selected-date-info {
+  margin-top: 18px;
+
+  padding: 15px;
+
+  background: #f7f8fb;
+
+  border-radius: 14px;
+
+  color: #687080;
+
+  font-size: 13px;
+}
+
+
+/* ========================================
+   設定
+======================================== */
+
+.settings-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  margin-bottom: 18px;
+}
+
+.settings-item {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  padding: 15px;
+
+  border: 0;
+
+  background: white;
+
+  border-radius: 18px;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 18px rgba(40, 60, 90, 0.04);
+
+  transition: 0.15s ease;
+}
+
+.settings-item:active {
+  transform: scale(0.98);
+}
+
+.settings-text {
+  display: flex;
+  flex-direction: column;
+
+  margin-left: 12px;
+}
+
+.settings-text strong {
+  font-size: 14px;
+}
+
+.settings-text small {
+  margin-top: 4px;
+
+  color: var(--sub-text);
+
+  font-size: 11px;
+}
+
+.settings-arrow {
+  margin-left: auto;
+
+  color: #b2b8c2;
+
+  font-size: 25px;
+}
+
+
+/* ========================================
+   設定詳細
+======================================== */
+
+.setting-page {
+  display: none;
+}
+
+.setting-page.active {
+  display: block;
+}
+
+.back-button {
+  border: 0;
+  background: transparent;
+
+  color: var(--primary);
+
+  font-size: 13px;
+
+  margin-bottom: 18px;
+
+  cursor: pointer;
+}
+
+
+/* ========================================
+   通知
+======================================== */
+
+.notification-setting {
+  margin-top: 18px;
+}
+
+.switch-row {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+}
+
+.switch-row span {
+  display: flex;
+  flex-direction: column;
+}
+
+.switch-row strong {
+  font-size: 14px;
+}
+
+.switch-row small {
+  margin-top: 5px;
+
+  color: var(--sub-text);
+
+  font-size: 11px;
+}
+
+.switch-row input {
+  appearance: none;
+
+  width: 48px;
+  height: 28px;
+
+  border-radius: 20px;
+
+  background: #dfe3ea;
+
+  position: relative;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.switch-row input::after {
+  content: "";
+
+  position: absolute;
+
+  top: 4px;
+  left: 4px;
+
+  width: 20px;
+  height: 20px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  transition: 0.2s ease;
+
+  box-shadow:
+    0 2px 5px rgba(0,0,0,0.15);
+}
+
+.switch-row input:checked {
+  background: var(--primary);
+}
+
+.switch-row input:checked::after {
+  transform: translateX(20px);
+}
+
+.time-setting {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 20px;
+
+  padding-top: 18px;
+
+  border-top: 1px solid var(--border);
+
+  font-size: 13px;
+}
+
+.time-setting input {
+  border: 0;
+
+  background: #f5f7fa;
+
+  padding: 9px 12px;
+
+  border-radius: 10px;
+}
+
+hr {
+  border: 0;
+
+  border-top: 1px solid var(--border);
+
+  margin: 22px 0;
+}
+
+
+/* ========================================
+   ボトムナビ
+======================================== */
+
+.bottom-nav {
+  position: fixed;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: calc(
+    76px + env(safe-area-inset-bottom)
+  );
+
+  padding:
+    6px
+    10px
+    env(safe-area-inset-bottom);
+
+  background:
+    rgba(255, 255, 255, 0.94);
+
+  border-top: 1px solid #e9ebef;
+
+  display: flex;
+
+  justify-content: space-around;
+  align-items: flex-start;
+
+  z-index: 1000;
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.bottom-nav-item {
+  width: 25%;
+
+  height: 62px;
+
+  border: 0;
+
+  background: transparent;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 4px;
+
+  color: #9aa1ad;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.bottom-nav-item span {
+  width: 38px;
+  height: 30px;
+
+  display: grid;
+  place-items: center;
+
+  font-size: 21px;
+
+  border-radius: 13px;
+
+  transition: 0.2s ease;
+}
+
+.bottom-nav-item small {
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.bottom-nav-item.active {
+  color: var(--primary);
+}
+
+.bottom-nav-item.active span {
+  background: var(--primary-light);
+
+  transform: translateY(-1px);
+}
+
+.bottom-nav-item:active {
+  transform: scale(0.93);
+}
+
+
+/* ========================================
+   ダークモード
+======================================== */
+
+@media (prefers-color-scheme: dark) {
+
+  :root {
+    --background: #11141a;
+    --card: #1b1f27;
+
+    --text: #f5f7fa;
+    --sub-text: #9299a7;
+
+    --border: #2a2f38;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--text);
+  }
+
+  .header-icon,
+  .large-page-icon,
+  .settings-item,
+  .card {
+    background: var(--card);
+    border-color: var(--border);
+  }
+
+  .check-item {
+    background: #20242c;
+    border-color: #2c313b;
+  }
+
+  .check-item.checked {
+    background: #1b3029;
+  }
+
+  .bottom-nav {
+    background: rgba(25, 28, 34, 0.94);
+    border-color: #2c3038;
+  }
+
+  .calendar-day.other-month {
+    color: #4d535e;
+  }
+
+  .selected-date-info,
+  .secondary-btn,
+  .reset-btn,
+  .calendar-arrow,
+  .time-setting input {
+    background: #242932;
+  }
+}
+
+
+/* ========================================
+   タブレット・PC
+======================================== */
+
+@media (min-width: 700px) {
+
+  body {
+    padding-bottom: 110px;
+  }
+
+  .bottom-nav {
+    left: 50%;
+    right: auto;
+    bottom: 20px;
+
+    width: 500px;
+
+    height: 70px;
+
+    padding: 5px;
+
+    transform: translateX(-50%);
+
+    border: 1px solid #e5e8ed;
+
+    border-radius: 22px;
+
+    box-shadow:
+      0 10px 35px rgba(30, 45, 70, 0.12);
+  }
+
+  .bottom-nav-item {
+    height: 60px;
+  }
+}
