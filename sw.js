@@ -1,4 +1,4 @@
-const CACHE_NAME = "forget-check-v4";
+const CACHE_NAME = "forget-check-v4.1";
 
 const ASSETS = [
   "./",
