@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
   <meta charset="UTF-8">
 
@@ -9,332 +8,363 @@
     content="width=device-width, initial-scale=1.0, viewport-fit=cover"
   >
 
-  <meta name="theme-color" content="#f7f9fc">
+  <meta
+    name="theme-color"
+    content="#4f7cff"
+  >
 
   <title>忘れ物チェック</title>
 
-  <!-- PWA マニフェスト -->
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="icon.png">
-
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="./icon.png">
 </head>
 
 <body>
 
-  <!-- =========================
-       ヘッダー
-  ========================== -->
+<!-- =========================
+     ヘッダー
+========================= -->
 
-  <header class="app-header">
+<header class="app-header">
 
-    <div>
-      <p class="header-greeting">
-        おはようございます ☀️
-      </p>
+  <div>
 
-      <h1>
-        忘れ物チェック
-      </h1>
+    <p class="header-greeting">
+      おはようございます ☀️
+    </p>
 
-      <p id="today" class="today-date"></p>
-    </div>
+    <h1>
+      忘れ物チェック
+    </h1>
 
-    <div class="header-icon">
-      🎒
-    </div>
+    <p id="today" class="today-date"></p>
 
-  </header>
+  </div>
 
+  <div class="header-icon">
+    🎒
+  </div>
 
-  <!-- =========================
-       メイン
-  ========================== -->
+</header>
 
-  <main>
 
-    <!-- =======================
-         今日
-    ======================== -->
+<!-- =========================
+     メイン
+========================= -->
 
-    <section
-      id="todayPage"
-      class="main-page active"
-    >
+<main>
 
-      <!-- 達成率 -->
+  <!-- =======================
+       今日
+  ======================== -->
 
-      <div class="achievement-card">
+  <section
+    id="todayPage"
+    class="main-page active"
+  >
 
-        <div class="achievement-content">
+    <!-- 達成率 -->
 
-          <span class="achievement-label">
-            今日の準備
-          </span>
+    <div class="achievement-card">
 
-          <strong id="achievementRate">
-            0%
-          </strong>
+      <div class="achievement-content">
 
-          <p id="achievementMessage">
-            まずは持ち物を確認しましょう
-          </p>
-
-        </div>
-
-        <div class="progress-circle">
-
-          <svg viewBox="0 0 100 100">
-
-            <circle
-              class="progress-bg"
-              cx="50"
-              cy="50"
-              r="42"
-            />
-
-            <circle
-              id="progressCircle"
-              class="progress-value"
-              cx="50"
-              cy="50"
-              r="42"
-            />
-
-          </svg>
-
-          <span id="progressCircleText">
-            0%
-          </span>
-
-        </div>
-
-      </div>
-
-
-      <!-- 今日の時間割 -->
-
-      <div class="card">
-
-        <div class="section-heading">
-
-          <div>
-            <span class="section-icon blue">
-              📚
-            </span>
-
-            <div>
-              <h2>今日の時間割</h2>
-
-              <p>
-                今日の授業を確認しましょう
-              </p>
-            </div>
-          </div>
-
-        </div>
-
-        <div id="todaySchedule"></div>
-
-      </div>
-
-
-      <!-- 学校の持ち物 -->
-
-      <div class="card">
-
-        <div class="section-heading">
-
-          <div>
-
-            <span class="section-icon orange">
-              🏫
-            </span>
-
-            <div>
-              <h2>今日の持ち物</h2>
-
-              <p>
-                学校へ持っていくもの
-              </p>
-            </div>
-
-          </div>
-
-          <span
-            id="schoolProgress"
-            class="page-count"
-          >
-            0 / 0
-          </span>
-
-        </div>
-
-        <div
-          id="schoolList"
-          class="check-list"
-        ></div>
-
-        <button
-          class="reset-btn"
-          type="button"
-          onclick="resetChecks('school')"
-        >
-          ↻ チェックをリセット
-        </button>
-
-      </div>
-
-
-      <!-- お出かけ -->
-
-      <div class="card">
-
-        <div class="section-heading">
-
-          <div>
-
-            <span class="section-icon green">
-              🏠
-            </span>
-
-            <div>
-              <h2>お出かけの持ち物</h2>
-
-              <p>
-                出発前に確認しましょう
-              </p>
-            </div>
-
-          </div>
-
-        </div>
-
-        <div
-          id="outingList"
-          class="check-list"
-        ></div>
-
-        <button
-          class="reset-btn"
-          type="button"
-          onclick="resetChecks('outing')"
-        >
-          ↻ チェックをリセット
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <!-- =======================
-         カレンダー
-    ======================== -->
-
-    <section
-      id="calendarPage"
-      class="main-page"
-    >
-
-      <div class="page-header">
-
-        <span class="large-page-icon">
-          📅
+        <span class="achievement-label">
+          今日の準備
         </span>
 
-        <div>
-          <h2>カレンダー</h2>
+        <strong id="achievementRate">
+          0%
+        </strong>
 
-          <p>
-            日付を選択して確認できます
-          </p>
-        </div>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="calendar-header">
-
-          <button
-            id="prevMonth"
-            class="calendar-arrow"
-            type="button"
-          >
-            ‹
-          </button>
-
-          <strong id="calendarMonth">
-            2026年10月
-          </strong>
-
-          <button
-            id="nextMonth"
-            class="calendar-arrow"
-            type="button"
-          >
-            ›
-          </button>
-
-        </div>
-
-        <div
-          id="calendar"
-          class="calendar"
-        ></div>
-
-        <div
-          id="selectedDateInfo"
-          class="selected-date-info"
-        ></div>
+        <p id="achievementMessage">
+          まずは持ち物を確認しましょう
+        </p>
 
       </div>
 
-    </section>
+      <div class="progress-circle">
 
+        <svg viewBox="0 0 100 100">
 
-    <!-- =======================
-         時間割
-    ======================== -->
+          <circle
+            class="progress-bg"
+            cx="50"
+            cy="50"
+            r="42"
+          />
 
-    <section
-      id="timetablePage"
-      class="main-page"
-    >
+          <circle
+            id="progressCircle"
+            class="progress-value"
+            cx="50"
+            cy="50"
+            r="42"
+          />
 
-      <div class="page-header">
+        </svg>
 
-        <span class="large-page-icon">
-          📚
+        <span id="progressCircleText">
+          0%
         </span>
 
-        <div>
-          <h2>時間割</h2>
+      </div>
 
-          <p>
-            曜日ごとの授業を確認できます
-          </p>
+    </div>
+
+
+    <!-- 今日の時間割 -->
+
+    <div class="card">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="section-icon blue">
+            📚
+          </span>
+
+          <div>
+
+            <h2>
+              今日の時間割
+            </h2>
+
+            <p>
+              今日の授業を確認しましょう
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div id="todaySchedule"></div>
+
+    </div>
+
+
+    <!-- 学校の持ち物 -->
+
+    <div class="card">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="section-icon orange">
+            🏫
+          </span>
+
+          <div>
+
+            <h2>
+              今日の持ち物
+            </h2>
+
+            <p>
+              学校へ持っていくもの
+            </p>
+
+          </div>
+
+        </div>
+
+        <span
+          id="schoolProgress"
+          class="page-count"
+        >
+          0 / 0
+        </span>
+
+      </div>
+
+      <div
+        id="schoolList"
+        class="check-list"
+      ></div>
+
+      <button
+        class="reset-btn"
+        type="button"
+        onclick="resetChecks('school')"
+      >
+        ↻ チェックをリセット
+      </button>
+
+    </div>
+
+
+    <!-- お出かけ -->
+
+    <div class="card">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="section-icon green">
+            🏠
+          </span>
+
+          <div>
+
+            <h2>
+              お出かけの持ち物
+            </h2>
+
+            <p>
+              出発前に確認しましょう
+            </p>
+
+          </div>
+
         </div>
 
       </div>
 
       <div
-        id="timetable"
-        class="timetable"
+        id="outingList"
+        class="check-list"
       ></div>
 
-    </section>
+      <button
+        class="reset-btn"
+        type="button"
+        onclick="resetChecks('outing')"
+      >
+        ↻ チェックをリセット
+      </button>
+
+    </div>
+
+  </section>
 
 
-    <!-- =======================
-         設定
-    ======================== -->
+  <!-- =======================
+       カレンダー
+  ======================== -->
 
-    <section
-      id="settings"
-      class="main-page"
+  <section
+    id="calendarPage"
+    class="main-page"
+  >
+
+    <div class="page-header">
+
+      <span class="large-page-icon">
+        📅
+      </span>
+
+      <div>
+
+        <h2>
+          カレンダー
+        </h2>
+
+        <p>
+          日付を選択して予定を確認できます
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="calendar-header">
+
+        <button
+          id="prevMonth"
+          class="calendar-arrow"
+          type="button"
+        >
+          ‹
+        </button>
+
+        <strong id="calendarMonth"></strong>
+
+        <button
+          id="nextMonth"
+          class="calendar-arrow"
+          type="button"
+        >
+          ›
+        </button>
+
+      </div>
+
+      <div
+        id="calendar"
+        class="calendar"
+      ></div>
+
+      <div
+        id="selectedDateInfo"
+        class="selected-date-info"
+      ></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================
+       時間割
+  ======================== -->
+
+  <section
+    id="timetablePage"
+    class="main-page"
+  >
+
+    <div class="page-header">
+
+      <span class="large-page-icon">
+        📚
+      </span>
+
+      <div>
+
+        <h2>
+          時間割
+        </h2>
+
+        <p>
+          曜日ごとの授業を確認できます
+        </p>
+
+      </div>
+
+    </div>
+
+    <div
+      id="timetable"
+      class="timetable"
+    ></div>
+
+  </section>
+
+
+  <!-- =======================
+       設定
+  ======================== -->
+
+  <section
+    id="settings"
+    class="main-page"
+  >
+
+    <!-- 設定メニュー -->
+
+    <div
+      id="settingsMenu"
+      class="settings-menu"
     >
 
       <div class="page-header">
@@ -344,11 +374,15 @@
         </span>
 
         <div>
-          <h2>設定</h2>
+
+          <h2>
+            設定
+          </h2>
 
           <p>
             アプリを自分好みにカスタマイズ
           </p>
+
         </div>
 
       </div>
@@ -358,6 +392,7 @@
 
         <button
           class="settings-item"
+          type="button"
           onclick="showSettingPage('schedule')"
         >
 
@@ -366,10 +401,15 @@
           </span>
 
           <span class="settings-text">
-            <strong>日課表</strong>
+
+            <strong>
+              日課表
+            </strong>
+
             <small>
               曜日ごとの授業を設定
             </small>
+
           </span>
 
           <span class="settings-arrow">
@@ -381,6 +421,7 @@
 
         <button
           class="settings-item"
+          type="button"
           onclick="showSettingPage('subjects')"
         >
 
@@ -389,10 +430,15 @@
           </span>
 
           <span class="settings-text">
-            <strong>教科・持ち物</strong>
+
+            <strong>
+              教科・持ち物
+            </strong>
+
             <small>
-              教科書やノートを設定
+              学校へ持っていくものを設定
             </small>
+
           </span>
 
           <span class="settings-arrow">
@@ -404,6 +450,7 @@
 
         <button
           class="settings-item"
+          type="button"
           onclick="showSettingPage('outing')"
         >
 
@@ -412,10 +459,46 @@
           </span>
 
           <span class="settings-text">
-            <strong>お出かけ持ち物</strong>
+
+            <strong>
+              お出かけ持ち物
+            </strong>
+
             <small>
               財布・鍵などを設定
             </small>
+
+          </span>
+
+          <span class="settings-arrow">
+            ›
+          </span>
+
+        </button>
+
+
+        <!-- ★ テーマカラー設定 -->
+
+        <button
+          class="settings-item"
+          type="button"
+          onclick="showSettingPage('theme')"
+        >
+
+          <span class="settings-icon theme">
+            🎨
+          </span>
+
+          <span class="settings-text">
+
+            <strong>
+              テーマカラー
+            </strong>
+
+            <small>
+              アプリの好きな色を設定
+            </small>
+
           </span>
 
           <span class="settings-arrow">
@@ -427,6 +510,7 @@
 
         <button
           class="settings-item"
+          type="button"
           onclick="showSettingPage('data')"
         >
 
@@ -435,10 +519,15 @@
           </span>
 
           <span class="settings-text">
-            <strong>通知・データ</strong>
+
+            <strong>
+              通知・データ
+            </strong>
+
             <small>
               通知や保存データを管理
             </small>
+
           </span>
 
           <span class="settings-arrow">
@@ -449,206 +538,509 @@
 
       </div>
 
+    </div>
 
-      <!-- 設定詳細 -->
+
+    <!-- =======================
+         日課表設定
+    ======================== -->
+
+    <div
+      id="settingSchedule"
+      class="setting-page card"
+    >
+
+      <button
+        class="back-button"
+        type="button"
+        onclick="showSettingMenu()"
+      >
+        ← 設定に戻る
+      </button>
+
+      <h2>
+        📚 日課表
+      </h2>
+
+      <p class="description">
+        曜日ごとの授業を自由に設定できます。
+      </p>
 
       <div
-        id="settingSchedule"
-        class="setting-page card"
+        id="scheduleSettings"
+        class="setting-content"
+      ></div>
+
+    </div>
+
+
+    <!-- =======================
+         学校の持ち物設定
+    ======================== -->
+
+    <div
+      id="settingSubjects"
+      class="setting-page card"
+    >
+
+      <button
+        class="back-button"
+        type="button"
+        onclick="showSettingMenu()"
       >
+        ← 設定に戻る
+      </button>
 
-        <button
-          class="back-button"
-          onclick="showSettingMenu()"
-        >
-          ← 設定に戻る
-        </button>
+      <h2>
+        🎒 教科・持ち物
+      </h2>
 
-        <h2>📚 日課表</h2>
-
-        <p class="description">
-          曜日ごとの授業を設定できます。
-        </p>
-
-        <div id="scheduleSettings"></div>
-
-      </div>
-
+      <p class="description">
+        学校へ持っていく持ち物を自由に設定できます。
+      </p>
 
       <div
-        id="settingSubjects"
-        class="setting-page card"
+        id="subjectSettings"
+        class="setting-content"
+      ></div>
+
+    </div>
+
+
+    <!-- =======================
+         お出かけ持ち物設定
+    ======================== -->
+
+    <div
+      id="settingOuting"
+      class="setting-page card"
+    >
+
+      <button
+        class="back-button"
+        type="button"
+        onclick="showSettingMenu()"
       >
+        ← 設定に戻る
+      </button>
 
-        <button
-          class="back-button"
-          onclick="showSettingMenu()"
-        >
-          ← 設定に戻る
-        </button>
+      <h2>
+        🏠 お出かけ持ち物
+      </h2>
 
-        <h2>🎒 教科・持ち物</h2>
-
-        <p class="description">
-          教科ごとに必要な持ち物を設定できます。
-        </p>
-
-        <div id="subjectSettings"></div>
-
-      </div>
-
+      <p class="description">
+        お出かけするときの持ち物を自由に設定できます。
+      </p>
 
       <div
-        id="settingOuting"
-        class="setting-page card"
+        id="outingSettings"
+        class="setting-content"
+      ></div>
+
+    </div>
+
+
+    <!-- =======================
+         テーマカラー設定
+    ======================== -->
+
+    <div
+      id="settingTheme"
+      class="setting-page card"
+    >
+
+      <button
+        class="back-button"
+        type="button"
+        onclick="showSettingMenu()"
       >
+        ← 設定に戻る
+      </button>
 
-        <button
-          class="back-button"
-          onclick="showSettingMenu()"
-        >
-          ← 設定に戻る
-        </button>
+      <h2>
+        🎨 テーマカラー
+      </h2>
 
-        <h2>🏠 お出かけ持ち物</h2>
-
-        <p class="description">
-          お出かけするときの持ち物を設定できます。
-        </p>
-
-        <div id="outingSettings"></div>
-
-      </div>
+      <p class="description">
+        好きな色を選んでアプリを自分好みに変更できます。
+      </p>
 
 
-      <div
-        id="settingData"
-        class="setting-page card"
-      >
+      <div class="theme-setting">
 
-        <button
-          class="back-button"
-          onclick="showSettingMenu()"
-        >
-          ← 設定に戻る
-        </button>
+        <div class="theme-preview">
 
-        <h2>🔔 通知・データ</h2>
+          <div
+            id="themePreviewColor"
+            class="theme-preview-color"
+          ></div>
 
-        <p class="description">
-          通知や保存データを管理します。
-        </p>
+          <div>
 
-        <div class="notification-setting">
+            <strong>
+              現在のテーマカラー
+            </strong>
 
-          <label class="switch-row">
-
-            <span>
-              <strong>🔔 出発前通知</strong>
-
-              <small>
-                出発前に忘れ物チェックを通知します。
-              </small>
-            </span>
-
-            <input
-              type="checkbox"
-              id="notificationToggle"
+            <small
+              id="themeColorCode"
             >
-
-          </label>
-
-
-          <div class="time-setting">
-
-            <span>
-              通知時刻
-            </span>
-
-            <input
-              type="time"
-              id="notificationTime"
-              value="07:30"
-            >
+              #4f7cff
+            </small>
 
           </div>
 
         </div>
 
-        <hr>
+
+        <h3 class="theme-section-title">
+          おすすめカラー
+        </h3>
+
+
+        <div class="theme-presets">
+
+          <button
+            class="theme-color-button"
+            type="button"
+            data-color="#4f7cff"
+            style="--button-color:#4f7cff;"
+            aria-label="ブルー"
+          >
+            <span></span>
+            <small>ブルー</small>
+          </button>
+
+
+          <button
+            class="theme-color-button"
+            type="button"
+            data-color="#8b5cf6"
+            style="--button-color:#8b5cf6;"
+            aria-label="パープル"
+          >
+            <span></span>
+            <small>パープル</small>
+          </button>
+
+
+          <button
+            class="theme-color-button"
+            type="button"
+            data-color="#ec4899"
+            style="--button-color:#ec4899;"
+            aria-label="ピンク"
+          >
+            <span></span>
+            <small>ピンク</small>
+          </button>
+
+
+          <button
+            class="theme-color-button"
+            type="button"
+            data-color="#10b981"
+            style="--button-color:#10b981;"
+            aria-label="グリーン"
+          >
+            <span></span>
+            <small>グリーン</small>
+          </button>
+
+
+          <button
+            class="theme-color-button"
+            type="button"
+            data-color="#f59e0b"
+            style="--button-color:#f59e0b;"
+            aria-label="オレンジ"
+          >
+            <span></span>
+            <small>オレンジ</small>
+          </button>
+
+
+          <button
+            class="theme-color-button"
+            type="button"
+            data-color="#ef4444"
+            style="--button-color:#ef4444;"
+            aria-label="レッド"
+          >
+            <span></span>
+            <small>レッド</small>
+          </button>
+
+
+          <button
+            class="theme-color-button"
+            type="button"
+            data-color="#14b8a6"
+            style="--button-color:#14b8a6;"
+            aria-label="ティール"
+          >
+            <span></span>
+            <small>ティール</small>
+          </button>
+
+
+          <button
+            class="theme-color-button"
+            type="button"
+            data-color="#06b6d4"
+            style="--button-color:#06b6d4;"
+            aria-label="シアン"
+          >
+            <span></span>
+            <small>シアン</small>
+          </button>
+
+        </div>
+
+
+        <h3 class="theme-section-title">
+          好きな色を選ぶ
+        </h3>
+
+
+        <label
+          class="custom-color-picker"
+          for="customThemeColor"
+        >
+
+          <span class="custom-color-icon">
+            🌈
+          </span>
+
+          <span class="custom-color-text">
+
+            <strong>
+              自由に色を選択
+            </strong>
+
+            <small>
+              好きな色を自由に設定できます
+            </small>
+
+          </span>
+
+          <input
+            id="customThemeColor"
+            type="color"
+            value="#4f7cff"
+          >
+
+        </label>
+
 
         <button
+          id="resetThemeColor"
           class="secondary-btn"
-          onclick="saveData()"
+          type="button"
         >
-          💾 今すぐ保存
-        </button>
-
-        <button
-          class="reset-btn danger-reset"
-          onclick="resetAllData()"
-        >
-          ⚠️ すべてのデータを初期化
+          ↻ デフォルトの色に戻す
         </button>
 
       </div>
 
-    </section>
-
-  </main>
+    </div>
 
 
-  <!-- =========================
-       ボトムナビ
-  ========================== -->
+    <!-- =======================
+         通知・データ設定
+    ======================== -->
 
-  <nav class="bottom-nav">
-
-    <button
-      class="bottom-nav-item active"
-      data-page="todayPage"
+    <div
+      id="settingData"
+      class="setting-page card"
     >
-      <span>🏠</span>
-      <small>今日</small>
-    </button>
 
-    <button
-      class="bottom-nav-item"
-      data-page="calendarPage"
-    >
-      <span>📅</span>
-      <small>カレンダー</small>
-    </button>
+      <button
+        class="back-button"
+        type="button"
+        onclick="showSettingMenu()"
+      >
+        ← 設定に戻る
+      </button>
 
-    <button
-      class="bottom-nav-item"
-      data-page="timetablePage"
-    >
-      <span>📚</span>
-      <small>時間割</small>
-    </button>
+      <h2>
+        🔔 通知・データ
+      </h2>
 
-    <button
-      class="bottom-nav-item"
-      data-page="settings"
-    >
-      <span>⚙️</span>
-      <small>設定</small>
-    </button>
-
-  </nav>
+      <p class="description">
+        通知や保存データを管理します。
+      </p>
 
 
-  <script src="script.js"></script>
-  <script>
-    // サービスワーカーの登録
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./sw.js")
-          .then((reg) => console.log("ServiceWorker registered: ", reg))
-          .catch((err) => console.log("ServiceWorker registration failed: ", err));
+      <div class="notification-setting">
+
+        <label class="switch-row">
+
+          <span>
+
+            <strong>
+              🔔 出発前通知
+            </strong>
+
+            <small>
+              指定した時刻に忘れ物チェックを通知します。
+            </small>
+
+          </span>
+
+          <input
+            type="checkbox"
+            id="notificationToggle"
+          >
+
+        </label>
+
+
+        <div class="time-setting">
+
+          <span>
+            通知時刻
+          </span>
+
+          <input
+            type="time"
+            id="notificationTime"
+            value="07:30"
+          >
+
+        </div>
+
+
+        <div class="notification-message-setting">
+
+          <label for="notificationMessage">
+            通知メッセージ
+          </label>
+
+          <textarea
+            id="notificationMessage"
+            rows="3"
+            placeholder="忘れ物がないか確認しましょう！"
+          ></textarea>
+
+        </div>
+
+
+        <button
+          id="notificationPermissionButton"
+          class="secondary-btn"
+          type="button"
+        >
+          🔔 通知を許可する
+        </button>
+
+      </div>
+
+
+      <hr>
+
+
+      <button
+        class="secondary-btn"
+        type="button"
+        onclick="saveData()"
+      >
+        💾 今すぐ保存
+      </button>
+
+
+      <button
+        class="reset-btn danger-reset"
+        type="button"
+        onclick="resetAllData()"
+      >
+        ⚠️ すべてのデータを初期化
+      </button>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- =========================
+     ボトムナビ
+========================= -->
+
+<nav class="bottom-nav">
+
+  <button
+    class="bottom-nav-item active"
+    type="button"
+    data-page="todayPage"
+  >
+    <span>🏠</span>
+    <small>今日</small>
+  </button>
+
+  <button
+    class="bottom-nav-item"
+    type="button"
+    data-page="calendarPage"
+  >
+    <span>📅</span>
+    <small>カレンダー</small>
+  </button>
+
+  <button
+    class="bottom-nav-item"
+    type="button"
+    data-page="timetablePage"
+  >
+    <span>📚</span>
+    <small>時間割</small>
+  </button>
+
+  <button
+    class="bottom-nav-item"
+    type="button"
+    data-page="settings"
+  >
+    <span>⚙️</span>
+    <small>設定</small>
+  </button>
+
+</nav>
+
+
+<script src="script.js"></script>
+
+
+<script>
+
+if ("serviceWorker" in navigator) {
+
+  window.addEventListener("load", () => {
+
+    navigator.serviceWorker
+      .register("./sw.js")
+      .then(registration => {
+
+        console.log(
+          "ServiceWorker registered:",
+          registration
+        );
+
+      })
+      .catch(error => {
+
+        console.error(
+          "ServiceWorker registration failed:",
+          error
+        );
+
       });
-    }
-  </script>
+
+  });
+
+}
+
+</script>
+
 </body>
 </html>
