@@ -928,6 +928,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
+  
   function toggleCheck(
     type,
     index
@@ -936,10 +937,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const checks =
       data.checks[type];
 
-
     const position =
       checks.indexOf(index);
-
 
     if (position >= 0) {
 
@@ -954,12 +953,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-
     saveWithoutAlert();
 
+    // 画面を更新
     renderAll();
 
+    // 今回チェックした種類の持ち物を取得
+    const items =
+      type === "school"
+        ? data.schoolItems
+        : data.outingItems;
+
+    // すべてチェックされたか確認
+    const isComplete =
+      items.length > 0 &&
+      items.every(
+        (_, i) => checks.includes(i)
+      );
+
+    // 全部終わったら専用ページへ
+    if (isComplete) {
+
+      showCompletionPage(type);
+
+    }
+
   }
+
 
 
   window.resetChecks =
@@ -1125,6 +1145,178 @@ document.addEventListener("DOMContentLoaded", () => {
       completionShown = false;
 
     }
+
+  }
+
+  
+  /* ========================================
+     個別の準備完了ページ
+  ======================================== */
+
+  function showCompletionPage(type) {
+
+    // すでに表示されていたら何もしない
+    if (document.getElementById("checkCompletePage")) {
+      return;
+    }
+
+    const isSchool = type === "school";
+
+    const title = isSchool
+      ? "学校の準備完了！"
+      : "お出かけの準備完了！";
+
+    const message = isSchool
+      ? "学校の持ち物を全部確認できました！"
+      : "お出かけの持ち物を全部確認できました！";
+
+        // スマホ画面を一番上へ移動
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant"
+    });
+
+    // ページのスクロールもリセット
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+      // 完了ページを作成
+    const page = document.createElement("div");
+
+    page.id = "checkCompletePage";
+
+    page.style.cssText = `
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      padding-top: calc(24px + env(safe-area-inset-top));
+      padding-bottom: calc(24px + env(safe-area-inset-bottom));
+      background: linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary-dark),
+        #36c98f
+      );
+      color: white;
+      text-align: center;
+      animation: pageIn 0.35s ease;
+    `;
+
+    page.innerHTML = `
+      <div style="
+        width: 100%;
+        max-width: 420px;
+      ">
+
+        <div style="
+          font-size: 76px;
+          margin-bottom: 18px;
+        ">
+          🎉
+        </div>
+
+        <div style="
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: 3px;
+          margin-bottom: 12px;
+          opacity: 0.9;
+        ">
+          ALL CHECKED!
+        </div>
+
+        <h1 style="
+          font-size: clamp(27px, 7vw, 38px);
+          font-weight: 900;
+          margin-bottom: 18px;
+        ">
+          ${title}
+        </h1>
+
+        <div style="
+          font-size: 68px;
+          font-weight: 900;
+          margin-bottom: 10px;
+        ">
+          100%
+        </div>
+
+        <p style="
+          font-size: 15px;
+          line-height: 1.8;
+          margin-bottom: 35px;
+        ">
+          ${message}
+          <br>
+          忘れ物チェック完了！
+        </p>
+
+        <div style="
+          background: rgba(255,255,255,0.18);
+          border-radius: 18px;
+          padding: 18px;
+          margin-bottom: 25px;
+          font-size: 17px;
+          font-weight: 700;
+        ">
+          ✨ 準備ばっちり！ ✨
+        </div>
+
+        <button
+          id="returnCheckButton"
+          type="button"
+          style="
+            width: 100%;
+            padding: 17px;
+            border: 0;
+            border-radius: 16px;
+            background: white;
+            color: var(--primary-dark);
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+          "
+        >
+          ↩ もう一度確認する
+        </button>
+
+      </div>
+    `;
+
+    document.body.appendChild(page);
+
+    
+    // ページを閉じる共通処理
+    function closeCompletionPage() {
+
+      if (page.parentNode) {
+        page.remove();
+      }
+
+      clearTimeout(autoCloseTimer);
+
+    }
+
+    // 戻るボタン
+    document
+      .getElementById("returnCheckButton")
+      .addEventListener("click", () => {
+
+        closeCompletionPage();
+
+      });
+
+    // 3秒後に自動で閉じる
+    const autoCloseTimer = setTimeout(() => {
+
+      closeCompletionPage();
+
+    }, 3000);
 
   }
 
